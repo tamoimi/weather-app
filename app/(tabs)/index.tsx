@@ -1,20 +1,40 @@
-import { Image, StyleSheet, Platform, View, Text } from "react-native";
+import { Image, StyleSheet, Platform, View, Text, SafeAreaView, TextInput } from "react-native";
 
 import { HelloWave } from "@/components/HelloWave";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
+import { useState } from "react";
 
 export default function HomeScreen() {
+  {
+    /* test react-native ------------------------------------------------------------------------ */
+  }
+  const [text, onChangeText] = useState("Useless Text");
+  const [number, onChangeNumber] = useState("");
+
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: "#A1CEDC", dark: "#1D3D47" }}
       headerImage={<Image source={require("@/assets/images/partial-react-logo.png")} style={styles.reactLogo} />}
     >
-      {/* test react-native */}
+      {/* test react-native ------------------------------------------------------------------------ */}
       <View>
         <Text style={{ color: "white" }}>hello!!!👍</Text>
       </View>
+
+      <SafeAreaView>
+        <TextInput style={styles.input} onChangeText={onChangeText} value={text} />
+        <TextInput
+          style={styles.input}
+          onChangeText={onChangeNumber}
+          value={number}
+          placeholder="useless placeholder"
+          keyboardType="numeric"
+        />
+      </SafeAreaView>
+
+      {/* test react-native ------------------------------------------------------------------------ */}
 
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">Welcome Tami!!!</ThemedText>
@@ -61,5 +81,13 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     position: "absolute",
+  },
+  input: {
+    height: 40,
+    margin: 12,
+    borderWidth: 1,
+    padding: 10,
+    borderColor: "#ccc",
+    borderRadius: 8,
   },
 });
