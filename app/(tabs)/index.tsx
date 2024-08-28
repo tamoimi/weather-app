@@ -11,19 +11,26 @@ export default function HomeScreen() {
   // ===================================================================================================================
   // get current location
   // ===================================================================================================================
+  const [city, setCity] = useState("Loading...")
   const [location, setLocation] = useState();
   const [ok, setOk] = useState(true);
 
   const ask = async () => {
+    // get permission from user for current location
     const { granted } = await Location.requestForegroundPermissionsAsync();
     if (!granted) {
       setOk(false);
     }
+
+    console.log("granted", granted)
+                               
+    // 
     const {
       coords: { latitude, longitude },
     } = await Location.getCurrentPositionAsync({ accuracy: 5 });
-    const location = await Location.reverseGeocodeAsync({ latitude, longitude }, { useGoogleMaps: false });
-    console.log("location", location);
+    const location = await Location.reverseGeocodeAsync({ latitude, longitude }, { useGoogleMaps: true });
+    // setCity(location[0].city)
+    // need to add api key
   };
   useEffect(() => {
     ask();
@@ -35,7 +42,7 @@ export default function HomeScreen() {
       <StatusBar style="light" />
       {/* city */}
       <View style={styles.city}>
-        <Text style={styles.cityName}>Seoul</Text>
+        <Text style={styles.cityName}>{"Seoul"}</Text>
       </View>
       {/* weather */}
       <ScrollView horizontal pagingEnabled showsHorizontalScrollIndicator={false}>
