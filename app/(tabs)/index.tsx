@@ -11,7 +11,7 @@ export default function HomeScreen() {
   // ===================================================================================================================
   // get current location
   // ===================================================================================================================
-  const [city, setCity] = useState("Loading...")
+  const [city, setCity] = useState("Loading...");
   const [location, setLocation] = useState();
   const [ok, setOk] = useState(true);
 
@@ -22,15 +22,12 @@ export default function HomeScreen() {
       setOk(false);
     }
 
-    console.log("granted", granted)
-                               
-    // 
     const {
       coords: { latitude, longitude },
     } = await Location.getCurrentPositionAsync({ accuracy: 5 });
     const location = await Location.reverseGeocodeAsync({ latitude, longitude }, { useGoogleMaps: true });
     // setCity(location[0].city)
-    // need to add api key
+    // need to add api key 🚨
   };
   useEffect(() => {
     ask();
